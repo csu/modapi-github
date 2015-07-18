@@ -28,7 +28,11 @@ def check_streak():
         if arrow.get(event["created_at"]) > today:
             if event["type"] in STREAK_EVENTS:
                 response['result'] = True
+                message = 'GitHub Streak: Done'
+                notifier.send(message, title=message, source='modapi')
                 return jsonify(response)
     
     response['result'] = False
+    message = 'GitHub Streak: Incomplete'
+    notifier.send(message, title=message, source='modapi')
     return jsonify(response)
