@@ -29,13 +29,11 @@ def check_streak():
             if event["type"] in STREAK_EVENTS:
                 response['result'] = True
                 message = 'GitHub Streak: Done'
-                notifier.send(message, title=message, source='modapi')
-                return jsonify(response)
-    
-    response['result'] = False
+            else:
+                response['result'] = False
+                message = 'GitHub Streak: Incomplete'
 
-    if not request.args.get('notifywhenfalse') or not response['result']:
-        message = 'GitHub Streak: Incomplete'
+    if not request.args.get('notifywhentrue') or not response['result']:
         notifier.send(message, title=message, source='modapi')
-        
+
     return jsonify(response)
