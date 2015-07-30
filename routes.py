@@ -24,6 +24,7 @@ def check_streak():
     response = {'status': 'ok'}
 
     occurred_today = []
+    is_complete = False
     for event in events:
         if arrow.get(event["created_at"]) > today:
             is_complete = is_complete or (event["type"] in STREAK_EVENTS)
