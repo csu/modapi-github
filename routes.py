@@ -21,7 +21,6 @@ STREAK_EVENTS = ['CreateEvent', 'PushEvent']
 def check_streak():
     today = arrow.now().floor('day')
     events = requests.get('https://api.github.com/users/csu/events').json()
-    response = {'status': 'ok'}
 
     occurred_today = []
     is_complete = False
@@ -34,4 +33,4 @@ def check_streak():
     if not is_complete or not request.args.get('onlyNotifyWhenIncomplete'):
         notifier.send(message, title=message, source='modapi')
 
-    return jsonify(response)
+    return jsonify({'status': 'ok', 'is_complete': is_complete})
