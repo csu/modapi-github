@@ -8,12 +8,12 @@ import secrets
 
 module = Blueprint(config['module_name'], __name__)
 
+STREAK_EVENTS = ['CreateEvent', 'PushEvent']
+
 @module.route('/')
 @require_secret
 def get_events():
     return jsonify({'response': requests.get('https://api.github.com/users/csu/events').json()})
-
-STREAK_EVENTS = ['CreateEvent', 'PushEvent']
 
 @module.route('/streak')
 @module.route('/streak/')
