@@ -4,7 +4,6 @@ import requests
 
 from common import require_secret, dashboard_item
 from config import config
-import secrets
 
 module = Blueprint(config['module_name'], __name__)
 
